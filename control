@@ -1,0 +1,9 @@
+Package: com.yourname.robloxexecutor
+Name: 0x108 Executor
+Version: 1.0.0
+Architecture: iphoneos-arm64
+Description: Roblox internal executor bridge for iOS
+Maintainer: YourName
+Author: YourName
+Section: Tweaks
+Depends: mobilesubstrate
