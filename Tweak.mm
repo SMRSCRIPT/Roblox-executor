@@ -1,44 +1,42 @@
 #import <UIKit/UIKit.h>
 
-// دالة البدء عند تشغيل اللعبة وحقن الملف
+// دالة إظهار القائمة
+static void ShowSuccessMenu() {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIWindow *window = nil;
+        
+        // طريقة جلب النافذة المتوافقة مع iOS 26
+        if (@available(iOS 13.0, *)) {
+            for (UIWindowScene *scene in [UIApplication sharedApplication].connectedScenes) {
+                if (scene.activationState == UISceneActivationStateForegroundActive) {
+                    window = scene.windows.firstObject;
+                    break;
+                }
+            }
+        } else {
+            window = [UIApplication sharedApplication].keyWindow;
+        }
+
+        if (window && window.rootViewController) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"0x108 Status"
+                                           message:@"\n✅ تم التفعيل بنجاح"
+                                    preferredStyle:UIAlertControllerStyleAlert];
+
+            UIAlertAction *ok = [UIAlertAction actionWithTitle:@"استمرار" 
+                                                         style:UIAlertActionStyleDefault 
+                                                       handler:nil];
+            [alert addAction:ok];
+
+            [window.rootViewController presentViewController:alert animated:YES completion:nil];
+        }
+    });
+}
+
+// محرك التشغيل عند الحقن (Constructor)
 __attribute__((constructor))
 static void initialize() {
-    // ننتظر 10 ثوانٍ لضمان استقرار محرك اللعبة وتجاوز الفحوصات الأولية
+    // انتظار 10 ثوانٍ لضمان استقرار اللعبة تماماً
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        @try {
-            // الوصول للنافذة الرئيسية للعبة (KeyWindow)
-            UIWindow *keyWindow = nil;
-            if (@available(iOS 13.0, *)) {
-                for (UIWindowScene *scene in [UIApplication sharedApplication].connectedScenes) {
-                    if (scene.activationState == UISceneActivationStateForegroundActive) {
-                        for (UIWindow *window in scene.windows) {
-                            if (window.isKeyWindow) {
-                                keyWindow = window;
-                                break;
-                            }
-                        }
-                    }
-                }
-            } else {
-                keyWindow = [UIApplication sharedApplication].keyWindow;
-            }
-
-            // التأكد من وجود الـ RootViewController لإظهار الرسالة فوقه
-            UIViewController *root = keyWindow.rootViewController;
-            if (root) {
-                // إنشاء نافذة التنبيه (Alert)
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"0x108 Executor"
-                                                                               message:@"Dylib Injected Successfully!\nReady for Lua Execution."
-                                                                        preferredStyle:UIAlertControllerStyleAlert];
-                
-                [alert addAction:[UIAlertAction actionWithTitle:@"Got it" style:UIAlertActionStyleDefault handler:nil]];
-                
-                // عرض التنبيه
-                [root presentViewController:alert animated:YES completion:nil];
-            }
-        } @catch (NSException *exception) {
-            // في حال حدوث خطأ، سيتم طباعته في الـ Logs بدلاً من إغلاق اللعبة
-            NSLog(@"[0x108] Initialization Error: %@", exception.reason);
-        }
+        ShowSuccessMenu();
     });
 }
