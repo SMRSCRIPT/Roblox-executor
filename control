@@ -1,8 +1,8 @@
-Package: com.yourname.robloxsimple
-Name: 0x108 Simple
+Package: com.yourname.robloxexecutor
+Name: 0x108 Ultra Executor
 Version: 1.0.0
 Architecture: iphoneos-arm64
-Description: Simple activation menu for Roblox iOS 26
+Description: Full Lua Support for Roblox iOS 26
 Maintainer: Developer
 Author: Developer
 Section: Tweaks
