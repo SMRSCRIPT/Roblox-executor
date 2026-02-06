@@ -1,9 +1,9 @@
-Package: com.yourname.robloxexecutor
-Name: 0x108 Executor
+Package: com.yourname.robloxsimple
+Name: 0x108 Simple
 Version: 1.0.0
 Architecture: iphoneos-arm64
-Description: Roblox internal executor bridge for iOS
-Maintainer: YourName
-Author: YourName
+Description: Simple activation menu for Roblox iOS 26
+Maintainer: Developer
+Author: Developer
 Section: Tweaks
 Depends: mobilesubstrate
