@@ -22,7 +22,9 @@ jobs:
         run: |
           export THEOS=~/theos
           export SDKPATH=$(xcrun --sdk iphoneos --show-sdk-path)
+          # تنظيف عميق للمجلدات السابقة قبل البدء
           make clean
+          rm -rf .theos obj packages
           make FINALPACKAGE=1 SYSROOT=$SDKPATH
         env:
           THEOS: ~/theos
