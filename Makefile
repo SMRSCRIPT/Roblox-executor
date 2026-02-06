@@ -1,6 +1,6 @@
-# استهداف معمارية 64 بت وأنظمة iOS الحديثة
+# تحديد المعمارية والنظام
 ARCHS = arm64
-TARGET := iphone:clang:latest:15.0
+TARGET := iphone:clang:latest:14.0
 
 include $(THEOS)/makefiles/common.mk
 
