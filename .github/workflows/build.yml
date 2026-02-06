@@ -1,0 +1,35 @@
+name: Build Roblox Executor
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Theos
+        run: |
+          bash -c "$(curl -fsSL https://raw.githubusercontent.com/theos/theos/master/bin/install-theos)"
+          echo "THEOS=~/theos" >> $GITHUB_ENV
+
+      - name: Build Project
+        run: |
+          export THEOS=~/theos
+          # جلب مسار SDK النظام الأصلي من Xcode المدمج في GitHub
+          export SDKPATH=$(xcrun --sdk iphoneos --show-sdk-path)
+          make clean
+          make FINALPACKAGE=1 SYSROOT=$SDKPATH
+        env:
+          THEOS: ~/theos
+
+      - name: Upload Dylib Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Roblox-Executor-Dylib
+          path: .theos/obj/*.dylib
