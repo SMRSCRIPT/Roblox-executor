@@ -5,7 +5,7 @@ include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = VR7Executor
 
-VR7Executor_FILES = VR7Executor_Final.mm
+VR7Executor_FILES = VR7Executor.mm
 VR7Executor_CFLAGS = -fobjc-arc -Wno-deprecated-declarations -O3
 VR7Executor_FRAMEWORKS = UIKit WebKit Foundation Security CoreGraphics
 VR7Executor_LIBRARIES = substrate
