@@ -34,3 +34,6 @@ jobs:
         with:
           name: Roblox-Dylib
           path: .theos/obj/*.dylib
+permissions:
+  contents: write
+  packages: write
