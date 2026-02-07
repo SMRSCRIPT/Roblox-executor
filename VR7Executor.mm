@@ -18,6 +18,8 @@
 #import <objc/runtime.h>
 #import <CoreGraphics/CoreGraphics.h>
 
+struct lua_State;
+typedef struct lua_State lua_State;
 // =====================================================
 // Configuration
 // =====================================================
