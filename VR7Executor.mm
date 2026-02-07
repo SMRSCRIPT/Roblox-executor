@@ -59,13 +59,11 @@ static bool g_LuauReady = false;
 // =====================================================
 // Lua C API Definitions
 // =====================================================
-
+struct lua_State;
 typedef struct lua_State lua_State;
 typedef int (*lua_CFunction)(lua_State *L);
 typedef double lua_Number;
 typedef ptrdiff_t lua_Integer;
-// يجب تعريفها قبل استخدامها في المتغيرات العالمية
-typedef struct lua_State lua_State; 
 
 // Core functions
 typedef int (*lua_gettop_t)(lua_State *L);
