@@ -1,9 +1,9 @@
-Package: com.yourname.robloxexecutor
-Name: 0x108 Ultra Executor
-Version: 1.0.0
+Package: com.vr7.executor
+Name: VR7 Ultimate Executor
+Version: 3.0.0
 Architecture: iphoneos-arm64
-Description: Full Lua Support for Roblox iOS 26
-Maintainer: Developer
-Author: Developer
+Description: Ultimate Roblox executor v3.0 with Script Hub, auto-updating offsets from GitHub, full Luau support, and maximum client-side script compatibility. Updated for version-80c7b8e578f241ff
+Maintainer: VR7 Team
+Author: VR7 Team
 Section: Tweaks
-Depends: mobilesubstrate
+Depends: mobilesubstrate (>= 0.9.5000), firmware (>= 14.0)
