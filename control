@@ -1,8 +1,8 @@
 Package: com.vr7.executor
 Name: VR7 Ultimate Executor
-Version: 3.0.0
+Version: 5.0.0
 Architecture: iphoneos-arm64
-Description: Ultimate Roblox executor v3.0 with Script Hub, auto-updating offsets from GitHub, full Luau support, and maximum client-side script compatibility. Updated for version-80c7b8e578f241ff
+Description: The ultimate Roblox executor - Auto-updating offsets, zero maintenance, maximum compatibility
 Maintainer: VR7 Team
 Author: VR7 Team
 Section: Tweaks
