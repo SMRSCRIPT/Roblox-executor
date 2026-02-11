@@ -1,39 +1,55 @@
-name: Build Roblox Executor
+name: Build VR7 Executor
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: macos-latest
-
+    
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Setup Theos
-        run: |
-          bash -c "$(curl -fsSL https://raw.githubusercontent.com/theos/theos/master/bin/install-theos)"
-          echo "THEOS=~/theos" >> $GITHUB_ENV
-
-      - name: Build Project
-        run: |
-          export THEOS=~/theos
-          export SDKPATH=$(xcrun --sdk iphoneos --show-sdk-path)
-          # تنظيف عميق للمجلدات السابقة قبل البدء
-          make clean
-          rm -rf .theos obj packages
-          make FINALPACKAGE=1 SYSROOT=$SDKPATH
-        env:
-          THEOS: ~/theos
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: Roblox-Dylib
-          path: .theos/obj/*.dylib
-permissions:
-  contents: write
-  packages: write
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+      
+    - name: Setup Theos
+      run: |
+        echo "Installing Theos..."
+        export THEOS=/opt/theos
+        git clone --recursive https://github.com/theos/theos.git $THEOS
+        curl -LO https://github.com/theos/sdks/archive/master.zip
+        unzip master.zip -d $THEOS/sdks
+        mv $THEOS/sdks/sdks-master/* $THEOS/sdks/
+        rm -rf master.zip $THEOS/sdks/sdks-master
+        
+    - name: Install Dependencies
+      run: |
+        brew install ldid
+        brew install dpkg
+        
+    - name: Build Package
+      run: |
+        export THEOS=/opt/theos
+        make clean
+        make package
+        
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: VR7-Executor-DEB
+        path: packages/*.deb
+        
+    - name: Create Release
+      if: github.ref == 'refs/heads/main'
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: v1.0.0-${{ github.run_number }}
+        name: VR7 Executor v1.0.0 Build ${{ github.run_number }}
+        files: packages/*.deb
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
