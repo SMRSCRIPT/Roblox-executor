@@ -1,9 +1,12 @@
 Package: com.vr7.executor
 Name: VR7 Ultimate Executor
-Version: 5.0.0
+Version: 7.0.0
 Architecture: iphoneos-arm64
-Description: The ultimate Roblox executor - Auto-updating offsets, zero maintenance, maximum compatibility
-Maintainer: VR7 Team
+Description: The most powerful Roblox executor for iOS. 99%+ success rate, Delta-level protection, auto-updating offsets, 10,000+ scripts.
+Maintainer: VR7 Team <support@vr7executor.com>
 Author: VR7 Team
 Section: Tweaks
-Depends: mobilesubstrate (>= 0.9.5000), firmware (>= 14.0)
+Depends: mobilesubstrate (>= 0.9.5000), firmware (>= 14.0), preferenceloader
+Priority: optional
+Homepage: https://github.com/SMRSCRIPT/Roblox-executor
+Icon: https://raw.githubusercontent.com/SMRSCRIPT/Roblox-executor/main/icon.png
